@@ -17,11 +17,19 @@ public class XFaktor implements Verseny {
 
     @Override
     public void nevez(Versenyzo versenyzo) {
-
+            this.versenyzok.add(versenyzo);
     }
 
     @Override
     public boolean visszalep(int azonosito) {
+        for (int i = 0; i < versenyzok.size(); i++) {
+            if(versenyzok.get(i).getAzonosito() == azonosito)
+            {
+                this.versenyzok.remove(i);
+                return true;
+            }
+        }
+        System.out.println("Nem találtunk a megadott azonosítójú versenyzőt!");
         return false;
     }
 
@@ -32,6 +40,13 @@ public class XFaktor implements Verseny {
 
     @Override
     public String toString() {
-        return "X-Faktor - " + evad + "\n" + versenyzok;
+        String res = "X-Faktor - " + evad + "\n\n";
+        for (int i = 0; i < versenyzok.size(); i++){
+            res += versenyzok.get(i).toString();
+            if(i < versenyzok.size()-1)
+            res += "\n";
+        }
+
+        return res;
     }
 }
